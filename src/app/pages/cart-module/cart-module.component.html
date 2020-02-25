@@ -1,0 +1,133 @@
+<div id="cartPage">
+    <div id="cartLayout">
+        <!-- Left side card - to show the cart items  -->
+        <div id="leftPane">
+            <mat-card>
+                <h1 class="headerText">
+                    YOUR SHOPING BAG
+                </h1>
+                <table style="width:100%;text-align: left;">
+                    <tr>
+                        <th style="width: 60%;">
+                            <strong> {{cartItemsData.length}}</strong> ITEM
+                        </th>
+                        <th style="width: 10%;">
+                            SIZE
+                        </th>
+                        <th style="width:10%">
+                            QTY
+                        </th>
+                        <th style="width: 10%;">
+                            PRICE
+                        </th>
+                    </tr>
+                    
+                    <tr *ngIf="cartItemsData.length==0">
+                        <p>Your cart is empty..!</p>
+                    </tr>
+
+                    <!-- Dynamically created rows -->
+                    <tr *ngFor="let item of cartItemsData;let ind = index">
+                        <td style="width: 50%;">
+                            <div class="itemInfo" >
+                                <img src= '{{"./assets/img/T" + item.p_id  + ".jpg"}}' (click)="openDialog(item)"/>
+    
+                                <div class="itemTxt">
+                                    <div class="topText" (click)="openDialog(item)">
+                                        <span style="text-transform: uppercase;font-weight: 400;"> {{item.p_variation +" "+ item.p_name}} </span> <br />
+                                        <span style="font-weight: 300;"> Style #: {{ item.p_style }}</span> <br />
+                                        <span style="font-weight: 100;"> Colour: {{ item.p_selected_color.name }}</span>
+                                    </div>
+                                    <div class="actionButtons">
+                                        <a (click)="openDialog(item)">EDIT</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+                                        <a (click)="removeItem(ind)">REMOVE</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+                                        <a (click)="saveForLater(ind)">SAVE FOR LATER</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 10%;">
+                            {{item.p_selected_size.code.toUpperCase()}}
+                        </td>
+                        <td style="width:10%">
+                            <input class="qtySpinner" matInput type="number" min="1" (change)="calculateTotal()" click="function(e){e.preventDefault()}"style="width: 40px;height:20px;text-align: center;" [(ngModel)]="item.p_quantity" />
+                        </td>
+                        <td style="width: 10%;">
+                            <sup style="font-size: 10px;"> {{ item.c_currency }} </sup> {{ ((item.p_quantity > 1 ? item.p_quantity : 1) * item.p_price) }}
+                        </td>
+                    </tr>
+                </table>
+            </mat-card>
+        </div>
+
+        <!-- Right side card - to display checkout steps -->
+        <mat-card id="rightPane">
+            <div class="checkOut">
+                <div class="div-coupen">
+                    <mat-form-field class="coupenInput">
+                        <mat-label>ENTER COUPEN CODE OR GIFT CARD</mat-label>
+                        <input matInput type="text" [(ngModel)]="value">
+                        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <button mat-button>APPLY</button>
+                </div>
+                <div>
+                    <div class="subtotal">
+                        <span class="label">
+                            SUBTOTAL
+                        </span>
+
+                        <span class="value">
+                            <sup style="font-size: 10px;"> $ </sup> {{ grandTotal | number:'2.2-5' }}
+                        </span>
+                    </div>
+
+                    <div class="promotional">
+                        <span class="label">
+                            PROMOTION CODE APPLIED {{ grandTotal > 70 ? "(10%)" :"" }}
+                        </span>
+
+                        <span class="value">
+                            <sup style="font-size: 10px;"> $  </sup> {{ promotionCost | number:'2.2-5' }}
+                        </span>
+                    </div>
+
+                    <div class="promotional">
+                        <span class="label">
+                            ESTIMATED SHIPING*
+                            <p style="width: 60%;font-size: 12px;">You {{isFreeShipingEligible ? " ":"not" }} qualify for free shoping because your order is  {{isFreeShipingEligible ? "over  ":" less than " }} $50</p>
+                        </span>
+
+                        <span class="value">
+                            <sup *ngIf="!isFreeShipingEligible" style="font-size: 10px;"> $  </sup> {{ isFreeShipingEligible ? "FREE" : stdShippingCharges | number:'2.2-5'}}
+                        </span>
+                    </div>
+
+                    <div class="promotional" style="border-bottom: 1px solid #e4dbde;padding-bottom: 30px;">
+                        <span class="label">
+                           ESTIMATED TOTAL
+                           <p style="font-size: 12px;">Tax will be applied during checkout</p>
+                        </span>
+
+                        <span class="value">
+                            <sup style="font-size: 10px;"> $  </sup> {{ (grandTotal - promotionCost +( !isFreeShipingEligible ? stdShippingCharges : 0)) | number:'2.2-5'}}
+                        </span>
+                    </div>
+
+                    <div class="promotional checkoutAction">
+                        <!-- <span class="label">
+                            PROMOTION CODE APPLIED
+                        </span> -->
+
+                        <span class="value">
+                            <button mat-button class="checkoutBtn">CHECKOUT</button>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </mat-card>
+    </div>
+</div>

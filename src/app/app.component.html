@@ -1,0 +1,19 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <img
+    width="40"
+    alt="Angular Logo"
+    src="../assets/img/logo.png"
+  />
+  <span>{{title}}</span>
+    <div class="spacer"></div>
+  <a aria-label="Your Cart" rel="noopener" href="/cart" title="Cart">
+    
+    <div id="cart_icon">
+        <i [matBadge]="cartItemsData.length" matBadgeColor="primary" class="material-icons">shopping_cart</i>
+    </div>
+    
+  </a>
+</div>
+
+<router-outlet></router-outlet>

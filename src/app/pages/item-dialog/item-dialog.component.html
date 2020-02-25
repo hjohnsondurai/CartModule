@@ -1,0 +1,45 @@
+<mat-dialog-content class="dialogeParent">
+    <a style="cursor: pointer;" mat-dialog-close><i class="material-icons">close</i></a>
+    <div class="itemEdit">
+        <div class="leftParent">
+            <div class="itemName">
+                {{item.p_name}}
+            </div>
+            
+            <div class="itemCost">
+                <sup style="font-size: 20px;"> {{ item.c_currency }} </sup> {{ ( item.p_quantity * item.p_price) }}
+            </div>
+            
+            <p style="text-align: center;padding-top: 10px;">Color</p>
+            <div style="display: flex;margin-left: 40%;">
+                <div class="colors" (click)="updateColor(color)" *ngFor="let color of item.p_available_options.colors" [style.background] = "color.hexcode"></div>
+            </div>
+
+            <div style="display: flex;padding-left: 22%;padding-top:20px;">
+                <span class="sizes" style="margin-left:10px;">
+                    <mat-form-field style="width: 75px;">
+                        <mat-label>Size</mat-label>
+                        <mat-select (change)="updateSize($element)" style="text-transform: uppercase;" [value]="item.p_selected_size.code">
+                            <mat-option *ngFor="let size of  item.p_available_options.sizes" [value]="size.code" style="text-transform: uppercase;"> {{ size.code }} </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </span>
+
+                <span class="qty" style="margin-left: 20px; margin-top: 18px;">
+                    <input matInput type="number" min="1" style="width: 40px;height:20px;text-align: center;border:1px solid #949494;padding: 3px;" [(ngModel)]="item.p_quantity" />
+                </span>
+            </div>
+
+            <div>
+                <button mat-button class="editBtn" (click)="saveAndClose()">UPDATE</button>
+                <p style="color: #999;font-size: 14px;text-align: center;">See product details</p>
+            </div>
+        </div>
+    </div>
+    <div class="itemImg">
+        <img src= '{{"./assets/img/T" + item.p_id  + ".jpg"}}' />
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+</mat-dialog-actions>

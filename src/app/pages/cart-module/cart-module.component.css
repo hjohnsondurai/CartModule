@@ -1,0 +1,114 @@
+#cartPage{
+    margin-top: 10px;
+}
+#cartLayout{
+    display: flex;
+}
+#leftPane{
+    height: auto;
+    width: 70vw;
+}
+#rightPane{
+    height: 65vh;
+    width: calc(100vw - 70vw);
+}
+#leftPane,#rightpane{
+    margin: 10px;
+    margin-top: 0px;
+}
+#leftPane .headerText{
+    font-weight: 300;
+    color: #999;
+}
+
+table {
+    width: 100%;
+}
+table th{
+    font-weight: 400;
+}
+table tr td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+table th{
+    padding: 10px;
+    border-bottom: 3px solid #e4dbde;
+}
+.itemInfo{
+    display: flex;
+}
+.topText:hover, .itemInfo img:hover{
+    cursor: pointer;
+}
+.itemInfo img{
+    max-width: 120px !important;
+    max-height: 120px !important;
+}
+.itemInfo .itemTxt{
+    margin-left: 15px;
+    position: relative;
+    font-size: 12px;
+    width: 100%;
+}
+.itemInfo .topText{
+    line-height: 19px;
+}
+.itemInfo .actionButtons{
+    position: absolute;
+    bottom: 0px;
+}
+
+.itemInfo .actionButtons a:hover{
+    color: #4a4ade;
+    cursor: pointer;
+}
+
+.qtySpinner{
+    border: 1px solid #9a9496;
+    padding: 3px;
+}
+
+/* Section for right pane */
+
+#rightPane{
+    position: sticky;
+    top: 45px;
+}
+.checkOut{
+
+}
+.div-coupen{
+    border-bottom: 1px solid #e4dbde;
+}
+.coupenInput {
+    width: 70%;
+}
+.subtotal, .promotional{
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin: 31px 6px 0px 5px;
+}
+.label{
+
+}
+.value{
+    position: absolute;
+    right: 5px;
+}
+.promotional{
+    margin: 31px 6px 0px 5px;
+}
+
+.checkoutAction{
+    margin: 8px;
+}
+.checkoutAction .label{
+    padding-top: 8px;
+}
+.checkoutBtn{
+    height: 30px;
+    background: #1868c1;
+    color: white
+}
